@@ -456,26 +456,26 @@ void displayGallery()
       }
       break;
     case 10:
-      for(int i = 0; i<2;i++)
-      {
-        for(int j = 0; j<2;j++)
-        {
-          image(galleryImgs[imgIndex], galleryX+j*frameWidth/4, galleryY+i*frameHeight/4, frameWidth/4, frameHeight/4);
-          imgIndex++;
-        }
-      }
-      image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY, frameWidth/2, frameHeight/2);
-      imgIndex++;
-      image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2, frameWidth/2, frameHeight/2);
+      image(galleryImgs[imgIndex], galleryX, galleryY, frameWidth/2, frameHeight/2);
       imgIndex++;
       for(int i = 0; i<2;i++)
       {
         for(int j = 0; j<2;j++)
         {
-          image(galleryImgs[imgIndex], galleryX+frameWidth/2+j*frameWidth/4, galleryY+frameHeight/2+i*frameHeight/4, frameWidth/4, frameHeight/4);
+          image(galleryImgs[imgIndex], galleryX+frameWidth/2+j*frameWidth/4, galleryY+i*frameHeight/4, frameWidth/4, frameHeight/4);
           imgIndex++;
         }
       }
+      for(int i = 0; i<2;i++)
+      {
+        for(int j = 0; j<2;j++)
+        {
+          image(galleryImgs[imgIndex], galleryX+j*frameWidth/4, galleryY+frameHeight/2+i*frameHeight/4, frameWidth/4, frameHeight/4);
+          imgIndex++;
+        }
+      }
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY+frameHeight/2, frameWidth/2, frameHeight/2);
+      imgIndex++;
       
       break;
   }
