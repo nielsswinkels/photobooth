@@ -16,7 +16,7 @@ final int APPROVE_DELAY = 10 *1000; // delay before the picture is saved
 final int SHOW_MORPH_DELAY = 4 *1000; // how long to display the final saved morph
 final int FLASH_DELAY = 10; // how long to flash a white background
 
-color backgroundColor = color(255);
+color backgroundColor = color(214,210,207);
 color marginColor = color(214,210,207);
 color progressFillColor = color(214,210,207);
 color progressStrokeColor = color(125);
@@ -32,7 +32,7 @@ int mode = MODE_IDLE;
 int startTime;
 
 // parameters for the location of the morphed face
-int screenWidth, screenHeight, marginH, marginV;
+int screenWidth, screenHeight, marginH, marginV, videoScaledWidth, videoScaledHeight;
 int progressCircleWidth, progessCircleHeight, progressCircleX, progressCircleY, galleryX, galleryY, frameWidth, frameHeight;
 
 
@@ -103,10 +103,12 @@ void setup() {
   println("screenWidth: "+screenWidth);
   println("screenHeight: "+screenHeight);
   scale = min( (screenWidth - 2.0*marginH) / (VIDEO_RES_WIDTH*1.0), (screenHeight - 2.0*marginV) / (VIDEO_RES_HEIGHT*1.0));
+  videoScaledWidth = int(VIDEO_RES_WIDTH * scale);
+  videoScaledHeight = int(VIDEO_RES_HEIGHT * scale);
   //scale = (screenWidth - 2.0*marginH) / (VIDEO_RES_WIDTH*1.0);
   println("scale: "+scale);
-  println("scaled video width: " + (scale*VIDEO_RES_WIDTH + 2*marginH));
-  println("scaled video height: "+ (scale*VIDEO_RES_HEIGHT + 2*marginV));
+  println("scaled video width plus margins: " + (videoScaledWidth + 2*marginH));
+  println("scaled video height plus margins: "+ (videoScaledHeight + 2*marginV));
   //frame.setResizable(true);
   
   
@@ -206,8 +208,8 @@ void draw() {
         //fill(255);
         //rect(marginH,marginV, 1366, 768);
         //println(VIDEO_RES_WIDTH * scale);
-        image(video,marginH,marginV, VIDEO_RES_WIDTH * scale, VIDEO_RES_HEIGHT * scale);
-        image(imgOverlay, marginH, marginV, overlayWidth * scale, overlayHeight * scale);
+        image(video,marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
+        image(imgOverlay, marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
         
         int seconds = round((APPROVE_DELAY - (millis() - startTime))/1000);
         //fill(0);
