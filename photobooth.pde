@@ -86,7 +86,6 @@ void setup() {
   //size(1366, 768);
   //fullScreen(1); // needs to be on first line. Can add argument for which screen. 
   
-  text("Loading...", 10, 10);
   screenWidth = width; //1366;
   screenHeight = height; //768;
   marginH = 54;
