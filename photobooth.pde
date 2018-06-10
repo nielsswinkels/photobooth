@@ -462,6 +462,10 @@ void displayGallery()
           imgIndex++;
         }
       }
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY, frameWidth/2, frameHeight/2);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2, frameWidth/2, frameHeight/2);
+      imgIndex++;
       for(int i = 0; i<2;i++)
       {
         for(int j = 0; j<2;j++)
@@ -470,6 +474,7 @@ void displayGallery()
           imgIndex++;
         }
       }
+      
       break;
   }
   
