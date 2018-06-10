@@ -275,8 +275,8 @@ void draw() {
         }
         else
         {
-          println("Showing..");
-          image(morph, marginH, marginV, frameWidth, frameHeight);
+          //println("Showing..");
+          image(morph,marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
         }
       }
       else
