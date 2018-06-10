@@ -72,7 +72,7 @@ int prevNrFiles = 0;
 Comparator<File> byModificationDate = new ModificationDateCompare();
 int galleryCounter = 0;
 PImage[] galleryImgs;
-int galleryMode = 16;
+int galleryMode = 10;
 boolean newMorphAvailable = false;
 
 void settings() {
@@ -432,6 +432,8 @@ void displayGallery()
     newMorphAvailable = false;
     galleryCounter = 0;
   }
+  
+  int imgIndex = 0;
   switch(galleryMode)
   {
     case 1:
@@ -439,13 +441,32 @@ void displayGallery()
       break;
     case 4:
     case 16:
-      int imgIndex = 0;
+    case 25:
+      
       float sqroot = sqrt(galleryMode);
       for(int i = 0; i<sqroot;i++)
       {
         for(int j = 0; j<sqroot;j++)
         {
           image(galleryImgs[imgIndex], galleryX+j*frameWidth/sqroot, galleryY+i*frameHeight/sqroot, frameWidth/sqroot, frameHeight/sqroot);
+          imgIndex++;
+        }
+      }
+      break;
+    case 10:
+      for(int i = 0; i<2;i++)
+      {
+        for(int j = 0; j<2;j++)
+        {
+          image(galleryImgs[imgIndex], galleryX+j*frameWidth/4, galleryY+i*frameHeight/4, frameWidth/4, frameHeight/4);
+          imgIndex++;
+        }
+      }
+      for(int i = 0; i<2;i++)
+      {
+        for(int j = 0; j<2;j++)
+        {
+          image(galleryImgs[imgIndex], galleryX+frameWidth/2+j*frameWidth/4, galleryY+frameHeight/2+i*frameHeight/4, frameWidth/4, frameHeight/4);
           imgIndex++;
         }
       }
