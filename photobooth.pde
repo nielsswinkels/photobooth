@@ -16,11 +16,11 @@ final int APPROVE_DELAY = 10 *1000; // delay before the picture is saved
 final int SHOW_MORPH_DELAY = 4 *1000; // how long to display the final saved morph
 final int FLASH_DELAY = 10; // how long to flash a white background
 
-color backgroundColor = color(227, 240, 125);
+color backgroundColor = color(255);
 color marginColor = color(214,210,207);
-color progressFillColor = color(214,123,53);
-color progressStrokeColor = color(36,78,75);
-color textColor = color(36,78,75);
+color progressFillColor = color(214,210,207);
+color progressStrokeColor = color(125);
+color textColor = color(80);
 color flashColor = color(255);
 
 
