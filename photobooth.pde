@@ -93,8 +93,8 @@ void setup() {
 
   progressCircleWidth = 200;
   progessCircleHeight = 200;
-  progressCircleX = screenWidth - marginH - progressCircleWidth +50;
-  progressCircleY = screenHeight - marginV - progessCircleHeight +90;
+  progressCircleX = marginH + progressCircleWidth - 25; //screenWidth - marginH - progressCircleWidth +50;
+  progressCircleY = screenHeight - marginV - progessCircleHeight + 25;
   galleryX = marginH;
   galleryY = marginV;
   frameWidth = screenWidth - (marginH * 2);
@@ -221,8 +221,6 @@ void draw() {
         fill(textColor);
         textSize(80);
         text(seconds, progressCircleX-10, progressCircleY+20);
-        text("Tar bild om", progressCircleX-520, progressCircleY+0);
-        text("Photo in", progressCircleX-460, progressCircleY+80);
       }
       break;
     case MODE_SAVING_PHOTO:  // display the generated morph
