@@ -288,6 +288,7 @@ void draw() {
       }
       else
       {
+        println("nrOfPhotosTaken:"+nrOfPhotosTaken);
         if(nrOfPhotosTaken < NR_OF_PHOTOS)
         {
            mode = MODE_COUNTDOWN;
@@ -296,6 +297,7 @@ void draw() {
         }
         else
         {
+          nrOfPhotosTaken = 0;
           mode = MODE_IDLE;
           println("Switching to IDLE");
         }
