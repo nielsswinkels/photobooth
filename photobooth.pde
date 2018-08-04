@@ -3,6 +3,8 @@ import processing.video.*;
 import java.util.Comparator;
 import java.util.Arrays;
 import java.io.File;
+import processing.sound.*;
+
 
 boolean debug = false;
 boolean showVideo = false;
@@ -66,6 +68,7 @@ float scale = 1.0;
 String[] overlayFiles;
 
 PImage imgOverlay;
+SoundFile shutterSound;
 
 
 
@@ -142,6 +145,10 @@ void setup() {
   textFont(createFont("olivier Regular", 36));
   
   overlayFiles = listFileNames(sketchPath()+"/img/overlay");
+  shutterSound = new SoundFile(this, "../camera-shutter.mp3"); // for example https://freesound.org/people/roachpowder/sounds/170229/
+  if(debug) {
+    shutterSound.play(); // test if audio works
+  }
   
   
   
@@ -235,6 +242,7 @@ void draw() {
       break;
     case MODE_SAVING_PHOTO:  // display the generated morph
       if(debug) println("Saving picture");
+      shutterSound.play();
       
       // append a 0 if the value is only one character
       String hours = (hour()<10) ? "00" : ""+hour();
