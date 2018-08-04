@@ -111,13 +111,18 @@ void setup() {
   
   
   String[] cameras = Capture.list();
-  println("Found "+cameras.length+" webcams.");
+  println("Found "+cameras.length+" webcams!");
+  int selectedCameraIndex = 0;
   for(int i = 0; i < cameras.length; i++)
   {
     //println(i+ ": "+cameras[i]);
+    if(trim(cameras[i]).equals("name=HD Pro Webcam C920,size=1280x720,fps=30")) {
+      selectedCameraIndex = i;
+      println("Selected camera index "+selectedCameraIndex);
+    }
   }
   
-  video = new Capture(this, VIDEO_RES_WIDTH, VIDEO_RES_HEIGHT, Capture.list()[142]); //
+  video = new Capture(this, VIDEO_RES_WIDTH, VIDEO_RES_HEIGHT, Capture.list()[selectedCameraIndex]); //
   
   startTime = millis();
   mode = 0;
