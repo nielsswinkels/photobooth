@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Arrays;
 import java.io.File;
 
-boolean debug = true;
+boolean debug = false;
 boolean showVideo = false;
 boolean fullscreenEnabled = true;
 
