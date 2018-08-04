@@ -48,11 +48,14 @@ int progressCircleWidth, progessCircleHeight, progressCircleX, progressCircleY, 
 // 1600x896
 // 1920x1080
 // 2304x1536 (max res)
-final int VIDEO_RES_WIDTH = 1280; // max = 2304x1536 (logitech 1080p)
-final int VIDEO_RES_HEIGHT = 720;
+final int VIDEO_RES_WIDTH = 1920; // max = 2304x1536 (logitech 1080p)
+final int VIDEO_RES_HEIGHT = 1080; //1920x1080
 
 int overlayWidth = VIDEO_RES_WIDTH;
 int overlayHeight = VIDEO_RES_HEIGHT;
+
+int videoPosX = 0;
+int videoPosY = 0;
 
 
 float scale = 1.0;
@@ -107,10 +110,14 @@ void setup() {
   videoScaledHeight = int(VIDEO_RES_HEIGHT * scale);
   //scale = (screenWidth - 2.0*marginH) / (VIDEO_RES_WIDTH*1.0);
   println("scale: "+scale);
+  println("scaled video width: " + (videoScaledWidth));
+  println("scaled video height: "+ (videoScaledHeight));
   println("scaled video width plus margins: " + (videoScaledWidth + 2*marginH));
   println("scaled video height plus margins: "+ (videoScaledHeight + 2*marginV));
   //frame.setResizable(true);
   
+  videoPosX = int((screenWidth - VIDEO_RES_WIDTH)/2.0);
+  videoPosY = int((screenHeight - VIDEO_RES_HEIGHT)/2.0);
   
   String[] cameras = Capture.list();
   println("Found "+cameras.length+" webcams!");
@@ -118,8 +125,8 @@ void setup() {
   for(int i = 0; i < cameras.length; i++)
   {
     println(i+ ": "+cameras[i]);
-    if(trim(cameras[i]).equals("name=HD Pro Webcam C920,size=1280x720,fps=30") ||
-        trim(cameras[i]).equals("name=Logitech HD Pro Webcam C920,size=1280x720,fps=30")) {
+    if(trim(cameras[i]).equals("name=HD Pro Webcam C920,size=1600x896,fps=30") ||
+        trim(cameras[i]).equals("name=Logitech HD Pro Webcam C920,size=1600x896,fps=30")) {
       selectedCameraIndex = i;
       println("Selected camera index "+selectedCameraIndex);
     }
@@ -206,8 +213,9 @@ void draw() {
         //fill(255);
         //rect(marginH,marginV, 1366, 768);
         //println(VIDEO_RES_WIDTH * scale);
-        image(video,marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
-        image(imgOverlay, marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
+        //image(video,videoPosX, videoPosY, videoScaledWidth, videoScaledHeight);
+        set(videoPosX, videoPosY, video); // much faster than image()
+        //image(imgOverlay, marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
         
         int seconds = round((APPROVE_DELAY - (millis() - startTime))/1000);
         //fill(0);
