@@ -228,7 +228,7 @@ void draw() {
         arc(progressCircleX, progressCircleY, progressCircleWidth, progessCircleHeight, PI/-2.0, PI/-2.0 + 2*PI*((millis() - startTime)/(APPROVE_DELAY*1.0)));
         fill(textColor);
         textSize(80);
-        text(seconds, progressCircleX-10, progressCircleY+20);
+        text(seconds+1, progressCircleX-10, progressCircleY+20);
       }
       break;
     case MODE_SAVING_PHOTO:  // display the generated morph
