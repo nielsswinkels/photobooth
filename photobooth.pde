@@ -117,8 +117,9 @@ void setup() {
   int selectedCameraIndex = 0;
   for(int i = 0; i < cameras.length; i++)
   {
-    //println(i+ ": "+cameras[i]);
-    if(trim(cameras[i]).equals("name=HD Pro Webcam C920,size=1280x720,fps=30")) {
+    println(i+ ": "+cameras[i]);
+    if(trim(cameras[i]).equals("name=HD Pro Webcam C920,size=1280x720,fps=30") ||
+        trim(cameras[i]).equals("name=Logitech HD Pro Webcam C920,size=1280x720,fps=30")) {
       selectedCameraIndex = i;
       println("Selected camera index "+selectedCameraIndex);
     }
