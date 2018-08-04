@@ -231,13 +231,20 @@ void draw() {
         //textSize(18);
         //text("Sparar bilden om " + seconds + " sekunder.", 10, 30);
         //noFill();
+        //strokeWeight(20);
+        strokeWeight(0);
+        noStroke(); 
+        fill(progressStrokeColor);
+        stroke(progressFillColor);
+        ellipse(progressCircleX, progressCircleY, progressCircleWidth, progessCircleHeight);
         fill(progressFillColor);
         stroke(progressStrokeColor);
-        strokeWeight(20);
         arc(progressCircleX, progressCircleY, progressCircleWidth, progessCircleHeight, PI/-2.0, PI/-2.0 + 2*PI*((millis() - startTime)/(APPROVE_DELAY*1.0)));
+        
+        ellipse(progressCircleX, progressCircleY, progressCircleWidth/2, progessCircleHeight/2);
         fill(textColor);
         textSize(80);
-        text(seconds+1, progressCircleX-10, progressCircleY+20);
+        text(seconds+1, progressCircleX-15, progressCircleY+25);
       }
       break;
     case MODE_SAVING_PHOTO:  // display the generated morph
