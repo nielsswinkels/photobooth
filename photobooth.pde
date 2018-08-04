@@ -14,7 +14,7 @@ Rectangle[] faces;
 
 final int APPROVE_DELAY = 10 *1000; // delay before the picture is saved
 final int SHOW_MORPH_DELAY = 4 *1000; // how long to display the final saved morph
-final int FLASH_DELAY = 10; // how long to flash a white background
+final int FLASH_DELAY = 200; // how long to flash a white background
 
 color backgroundColor = color(214,210,207);
 color marginColor = color(214,210,207);
