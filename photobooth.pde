@@ -223,7 +223,7 @@ void draw() {
         //println(VIDEO_RES_WIDTH * scale);
         //image(video,videoPosX, videoPosY, videoScaledWidth, videoScaledHeight);
         set(videoPosX, videoPosY, video); // much faster than image()
-        set(videoPosX, videoPosY, imgOverlay);
+        image(imgOverlay, videoPosX, videoPosY);
         //image(imgOverlay, marginH + (frameWidth - videoScaledWidth)/2.0, marginV + (frameHeight - videoScaledHeight)/2.0, videoScaledWidth, videoScaledHeight);
         
         int seconds = round((APPROVE_DELAY - (millis() - startTime))/1000);
