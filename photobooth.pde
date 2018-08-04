@@ -16,6 +16,7 @@ final int APPROVE_DELAY = 5 *1000; // delay before the picture is saved
 final int SHOW_MORPH_DELAY = 2 *1000; // how long to display the final saved morph
 final int FLASH_DELAY = 200; // how long to flash a white background
 final int NR_OF_PHOTOS = 3; // how many pictures to take
+final int GALLERY_REFRESH_TIME = 3*1000;
 
 color backgroundColor = color(214,210,207);
 color marginColor = color(214,210,207);
@@ -73,7 +74,7 @@ String photosDir, photosOriginalDir;
 String[] photosFiles;
 int prevNrFiles = 0;
 Comparator<File> byModificationDate = new ModificationDateCompare();
-int galleryCounter = 0;
+int galleryTimestamp = 0;
 PImage[] galleryImgs;
 int galleryMode = 11;
 boolean newMorphAvailable = false;
@@ -427,8 +428,9 @@ void displayGallery()
     }
   }
   
-  if(galleryCounter%100 == 0 || newMorphAvailable)
+  if(millis() - galleryTimestamp > GALLERY_REFRESH_TIME || newMorphAvailable)
   {
+    galleryTimestamp = millis();
     // move all images one step in the array
     
     
@@ -458,7 +460,6 @@ void displayGallery()
     
     // reset to start over
     newMorphAvailable = false;
-    galleryCounter = 0;
   }
   
   int imgIndex = 0;
@@ -548,7 +549,6 @@ void displayGallery()
   }
   
   prevNrFiles = photosFiles.length;
-  galleryCounter++;
 }
 
 int resizeWidth(int originalWidth, int originalHeight, int newHeight)
