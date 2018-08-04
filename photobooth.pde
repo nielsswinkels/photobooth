@@ -58,10 +58,8 @@ float scale = 1.0;
 //float openCVScale = 0.2;
 
 String[] overlayFiles;
-String[] idleFiles;
 
 PImage imgOverlay;
-PImage imgIdle;
 
 
 
@@ -128,9 +126,7 @@ void setup() {
   textFont(createFont("olivier Regular", 36));
   
   overlayFiles = listFileNames(sketchPath()+"/img/overlay");
-  idleFiles = listFileNames(sketchPath()+"/img/idle");
   
-  imgIdle = loadRandom("idle", idleFiles);
   
   
   photosDir = sketchPath()+"/photos/withoverlay";
@@ -301,13 +297,7 @@ PImage cutOutRectangle(PImage source, Rectangle rect, float scale)
   return pic.get();
 }
 
-void startOver() {
-  if(mode != 0) // we just switched back to mode 0
-    {
-      if(debug) println("new idle image");
-      imgIdle = loadRandom("idle", idleFiles); // new idle image
-    }
-    
+void startOver() {  
     mode = 0;
     if(debug) println("mode="+mode);
 }
