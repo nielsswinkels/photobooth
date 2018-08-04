@@ -72,7 +72,7 @@ int prevNrFiles = 0;
 Comparator<File> byModificationDate = new ModificationDateCompare();
 int galleryCounter = 0;
 PImage[] galleryImgs;
-int galleryMode = 10;
+int galleryMode = 11;
 boolean newMorphAvailable = false;
 
 void settings() {
@@ -93,8 +93,8 @@ void setup() {
 
   progressCircleWidth = 200;
   progessCircleHeight = 200;
-  progressCircleX = marginH + progressCircleWidth - 25; //screenWidth - marginH - progressCircleWidth +50;
-  progressCircleY = screenHeight - marginV - progessCircleHeight + 25;
+  progressCircleX = marginH + progressCircleWidth - 0; //screenWidth - marginH - progressCircleWidth +50;
+  progressCircleY = screenHeight - marginV - progessCircleHeight + 35;
   galleryX = marginH;
   galleryY = marginV;
   frameWidth = screenWidth - (marginH * 2);
@@ -124,7 +124,8 @@ void setup() {
   startTime = millis();
   mode = 0;
   
-  textFont(createFont("Whitney", 36));
+  //textFont(createFont("Whitney", 36));
+  textFont(createFont("olivier Regular", 36));
   
   overlayFiles = listFileNames(sketchPath()+"/img/overlay");
   idleFiles = listFileNames(sketchPath()+"/img/idle");
@@ -143,7 +144,7 @@ void setup() {
   
   String[] args = {"YourSketchNameHere"};
   GalleryApplet sa = new GalleryApplet();
-  PApplet.runSketch(args, sa);
+  //PApplet.runSketch(args, sa);
 }
 
 
@@ -188,12 +189,6 @@ void draw() {
     case MODE_IDLE:  // waiting
       // display an image in idle mode
       displayGallery();
-      int idleWidth = resizeWidth(imgIdle.width, imgIdle.height, frameWidth);
-      //image(imgIdle,marginH, marginV, frameWidth, frameHeight);
-      fill(255);
-      textSize(marginV-10);
-      text("Press the button to take a picture!", marginH, screenHeight-5);
-      //text("om du vill bli fotad!", marginH - 330, marginV + 60 + 100);
       break;
     case MODE_COUNTDOWN :  // wait untill start delay has passed
       if (millis() - startTime > APPROVE_DELAY)
@@ -466,6 +461,7 @@ void displayGallery()
           imgIndex++;
         }
       }
+      
       for(int i = 0; i<2;i++)
       {
         for(int j = 0; j<2;j++)
@@ -477,6 +473,39 @@ void displayGallery()
       image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY+frameHeight/2, frameWidth/2, frameHeight/2);
       imgIndex++;
       
+      fill(255);
+      textSize(50);
+      text("Press the button to take a picture!", marginH+200, screenHeight/2+50);
+      break;
+    case 11:
+      image(galleryImgs[imgIndex], galleryX, galleryY, frameWidth/2, frameHeight/2);
+      imgIndex++;
+      for(int i = 0; i<2;i++)
+      {
+        for(int j = 0; j<2;j++)
+        {
+          image(galleryImgs[imgIndex], galleryX+frameWidth/2+j*frameWidth/4, galleryY+i*frameHeight/4, frameWidth/4, frameHeight/4);
+          imgIndex++;
+        }
+      }
+      
+      image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX+frameWidth/4, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
+          
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2+frameWidth/4, galleryY+frameHeight/2, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2+frameWidth/4, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      
+      fill(75);
+      textSize(65);
+      text("Press the button to take a picture!", galleryX+frameWidth/4+40, galleryY+frameHeight/2+frameHeight/8+20);
       break;
   }
   
