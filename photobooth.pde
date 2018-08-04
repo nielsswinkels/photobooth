@@ -13,8 +13,9 @@ PImage videoResized;
 Rectangle[] faces;
 
 final int APPROVE_DELAY = 5 *1000; // delay before the picture is saved
-final int SHOW_MORPH_DELAY = 4 *1000; // how long to display the final saved morph
+final int SHOW_MORPH_DELAY = 2 *1000; // how long to display the final saved morph
 final int FLASH_DELAY = 200; // how long to flash a white background
+final int NR_OF_PHOTOS = 3; // how many pictures to take
 
 color backgroundColor = color(214,210,207);
 color marginColor = color(214,210,207);
@@ -29,6 +30,7 @@ final int MODE_COUNTDOWN = 1;
 final int MODE_SAVING_PHOTO = 2;
 final int MODE_DISPLAY_PHOTO = 3; //display the saved picture for a while
 int mode = MODE_IDLE;
+int nrOfPhotosTaken = 0;
 int startTime;
 
 // parameters for the location of the morphed face
@@ -188,7 +190,6 @@ void draw() {
   switch(mode)
   {
     case MODE_IDLE:  // waiting
-      // display an image in idle mode
       displayGallery();
       break;
     case MODE_COUNTDOWN :  // wait untill start delay has passed
@@ -249,6 +250,7 @@ void draw() {
       saveMorph.save(photosDir+"/photobooth"+lastMorphNr+".png");
       
       newMorphAvailable = true;
+      nrOfPhotosTaken++;
       
       //deleteOldestFiles();
       
@@ -277,8 +279,17 @@ void draw() {
       }
       else
       {
-        mode = MODE_IDLE;
-        println("Switching to IDLE");
+        if(nrOfPhotosTaken < NR_OF_PHOTOS)
+        {
+           mode = MODE_COUNTDOWN;
+           startTime = millis();
+           println("Switching to COUNTDOWN");
+        }
+        else
+        {
+          mode = MODE_IDLE;
+          println("Switching to IDLE");
+        }
       }
       break;
   }
@@ -408,16 +419,30 @@ void displayGallery()
   if(galleryCounter%100 == 0 || newMorphAvailable)
   {
     // move all images one step in the array
-    for(int i = galleryImgs.length-1; i > 0; i--)
-    {
-      galleryImgs[i] = galleryImgs[i-1];
-    }
-    // new image on index 0
-    galleryImgs[0] = loadImage(photosDir + "/" + photosFiles[int(random(photosFiles.length))]);
+    
     
     if(newMorphAvailable)
-    { // if a new image appeared, load that one
-      galleryImgs[0] = loadImage(photosDir + "/" + photosFiles[photosFiles.length-1]);
+    {
+      // new pictures have been taken. Make space by moving all previous images enough steps
+      for(int i = galleryImgs.length-1; i > NR_OF_PHOTOS-1; i--)
+      {
+        galleryImgs[i] = galleryImgs[i-NR_OF_PHOTOS];
+      }
+      
+      for(int i = 0; i < NR_OF_PHOTOS; i++) 
+      {
+        galleryImgs[i] = loadImage(photosDir + "/" + photosFiles[photosFiles.length-(i+1)]);
+      }
+    }
+    else
+    {
+      // just add one random image and move all others one step
+      for(int i = galleryImgs.length-1; i > 0; i--)
+      {
+        galleryImgs[i] = galleryImgs[i-1];
+      }
+      // new image on index 0
+      galleryImgs[0] = loadImage(photosDir + "/" + photosFiles[int(random(photosFiles.length))]);
     }
     
     // reset to start over
@@ -473,17 +498,23 @@ void displayGallery()
       text("Press the button to take a picture!", marginH+200, screenHeight/2+50);
       break;
     case 11:
-      image(galleryImgs[imgIndex], galleryX, galleryY, frameWidth/2, frameHeight/2);
+      //top left 2 small
+      image(galleryImgs[imgIndex], galleryX, galleryY, frameWidth/4, frameHeight/4);
       imgIndex++;
-      for(int i = 0; i<2;i++)
-      {
-        for(int j = 0; j<2;j++)
-        {
-          image(galleryImgs[imgIndex], galleryX+frameWidth/2+j*frameWidth/4, galleryY+i*frameHeight/4, frameWidth/4, frameHeight/4);
-          imgIndex++;
-        }
-      }
+      image(galleryImgs[imgIndex], galleryX+frameWidth/4, galleryY, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      // top right one big
+      image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY, frameWidth/2, frameHeight/2);
+      imgIndex++;
+      // top left 2 small
+      image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
+      image(galleryImgs[imgIndex], galleryX+frameWidth/4, galleryY+frameHeight/4, frameWidth/4, frameHeight/4);
+      imgIndex++;
       
+      
+      // 2nd half
+      // bottom left 3 small
       image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2, frameWidth/4, frameHeight/4);
       imgIndex++;
       image(galleryImgs[imgIndex], galleryX, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
@@ -491,6 +522,7 @@ void displayGallery()
       image(galleryImgs[imgIndex], galleryX+frameWidth/4, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
       imgIndex++;
           
+      // bottom right 3 small 
       image(galleryImgs[imgIndex], galleryX+frameWidth/2+frameWidth/4, galleryY+frameHeight/2, frameWidth/4, frameHeight/4);
       imgIndex++;
       image(galleryImgs[imgIndex], galleryX+frameWidth/2, galleryY+frameHeight/2+frameHeight/4, frameWidth/4, frameHeight/4);
