@@ -143,8 +143,8 @@ void setup() {
   
   video.start();
   
-  String[] args = {"YourSketchNameHere"};
-  GalleryApplet sa = new GalleryApplet();
+  //String[] args = {"YourSketchNameHere"};
+  //GalleryApplet sa = new GalleryApplet();
   //PApplet.runSketch(args, sa);
 }
 
