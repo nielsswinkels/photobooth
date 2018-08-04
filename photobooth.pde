@@ -93,8 +93,8 @@ void setup() {
 
   progressCircleWidth = 200;
   progessCircleHeight = 200;
-  progressCircleX = marginH + progressCircleWidth - 0; //screenWidth - marginH - progressCircleWidth +50;
-  progressCircleY = screenHeight - marginV - progessCircleHeight + 35;
+  progressCircleX = screenWidth/2; //screenWidth - marginH - progressCircleWidth +50;
+  progressCircleY = screenHeight/2;
   galleryX = marginH;
   galleryY = marginV;
   frameWidth = screenWidth - (marginH * 2);
