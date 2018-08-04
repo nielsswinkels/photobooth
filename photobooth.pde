@@ -559,8 +559,8 @@ void displayGallery()
       imgIndex++;
       
       fill(75);
-      textSize(65);
-      text("Press the button to take a picture!", galleryX+frameWidth/4+40, galleryY+frameHeight/2+frameHeight/8+20);
+      textSize(80);
+      text("Press the button to take a picture!", galleryX+frameWidth/4+60, galleryY+frameHeight/2+frameHeight/8+20);
       break;
   }
   
