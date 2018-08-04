@@ -82,7 +82,7 @@ boolean newMorphAvailable = false;
 void settings() {
   //size(320, 240, P3D);
   //size(1366, 768);
-  fullScreen(1);
+  fullScreen(2);
   //smooth();
 }
 
